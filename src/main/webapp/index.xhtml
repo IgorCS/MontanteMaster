@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Login</title>
+	<h:outputStylesheet library="algaworks" name="estilo.css" />
+</h:head>
+<h:body>
+
+	<p:dialog header="Entrar no Sistema" visible="true" closable="false"
+		draggable="false" resizable="false" width="300">
+		<center>
+			<h:outputText value="Usuário ou senha incorretos!"
+				rendered="#{param.erro}" style="color: darkred" />
+		</center>
+		<h:form>
+		<h:messages />
+		<h:panelGrid columns="2">
+			<h:outputText value="Username: " />
+			<h:inputText value="#{authenticator.username}" />
+			<h:outputText value="Password: " />
+			<h:inputText value="#{authenticator.password}" />
+		</h:panelGrid>
+
+		<h:commandButton value="Logar!" action="#{authenticator.login}" />
+	</h:form>
+	</p:dialog>
+</h:body>
+</html>
+
+<!-- 
+<h:form>
+		<h:messages />
+		<h:panelGrid columns="2">
+			<h:outputText value="Username: " />
+			<h:inputText value="#{authenticator.username}" />
+			<h:outputText value="Password: " />
+			<h:inputText value="#{authenticator.password}" />
+		</h:panelGrid>
+
+		<h:commandButton value="Logar!" action="#{authenticator.login}" />
+	</h:form>
+
+
+ -->

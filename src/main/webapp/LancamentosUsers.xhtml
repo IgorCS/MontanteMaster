@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	
+	
+	<f:metadata>
+		<f:viewAction action="#{consultaLancamentosBean.consultaLancamentoUsuario}" />
+	</f:metadata>
+
+		
+	<f:metadata>
+		<f:viewAction action="#{consultaLancamentosBean.consultar}" />
+	</f:metadata>
+
+	<ui:define name="titulo">Consulta de lançamentos</ui:define>
+
+	<ui:define name="corpo">
+
+		<h1>Consulta de lançamentos</h1>
+
+		<h:form id="frm">
+			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
+			<p:panelGrid columns="2" id="grid">
+			<!-- <p:outputLabel value="Pessoa" for="pessoa" />
+				<p:selectOneMenu value="#{consultaLancamentosBean.pessoa}"
+					id="pessoa" filter="true" filterMatchMode="contains">
+
+					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+					<f:selectItems value="#{consultaLancamentosBean.todasPessoas}"
+						var="pessoa" itemValue="#{pessoa}" itemLabel="#{pessoa.nome}" />
+				</p:selectOneMenu> -->
+				
+				<p:outputLabel value="Usuario" for="usuario" />
+				<p:selectOneMenu value="#{consultaLancamentosBean.usuario}"
+						id="usuario" filter="true" filterMatchMode="contains">
+					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />	
+					<f:selectItems value="#{consultaLancamentosBean.todosUsuarios}"
+						var="usuario" itemValue="#{usuario}" itemLabel="#{usuario.username}" />
+						<f:ajax event="change" render="frm"/> 
+					</p:selectOneMenu>				
+				
+				<br />
+				
+				
+				
+				<p:commandButton value="Pesquisar"
+						action="#{consultaLancamentosBean.consultaLancamentoUsuario}" icon="ui-icon-disk" update="@form"/>
+				<br />
+				<!--  <p:commandButton value="Pesquisar"
+						action="#{consultaLancamentosBean.consultar}" icon="ui-icon-disk" />-->
+				<br /><br />		
+				<!-- <p:commandButton value="Extrato:"
+						action="#{consultaLancamentosBean.calculaLucro}"
+						icon="ui-icon-calculator" update="@form" />-->
+			
+			
+			
+			
+						
+						
+						
+						
+						
+			<p:dataTable value="#{consultaLancamentosBean.lancamentos}"
+				var="lancamento" border="1" cellspacing="0" cellpadding="2"
+				paginator="true" rows="5" paginatorPosition="bottom">
+				<p:column headerText="Pessoa" sortBy="#{lancamento.pessoa.nome}">
+					<h:outputText value="#{lancamento.pessoa.nome}" />
+				</p:column>
+				
+				<p:column headerText="Usuario" sortBy="#{lancamento.usuario.username}">
+					<h:outputText value="#{lancamento.usuario.username}" />
+				</p:column>
+				
+				<p:column headerText="Descrição" sortBy="#{lancamento.descricao}">
+					<h:outputText value="#{lancamento.descricao}" />
+				</p:column>
+				<p:column headerText="Tipo" width="80">
+					<h:outputText value="#{lancamento.tipo.descricao}" />
+				</p:column>
+				<p:column headerText="Valor" style="text-align: right"
+					sortBy="#{lancamento.valor}" width="100">
+					<h:outputText value="#{lancamento.valor}">
+						<f:convertNumber type="currency" locale="pt_BR" />
+					</h:outputText>
+				</p:column>
+
+
+				<p:column headerText="Vencimento" style="text-align: center"
+					sortBy="#{lancamento.dataVencimento}" width="100">
+					<h:outputText value="#{lancamento.dataVencimento}">
+						<f:convertDateTime pattern="dd/MM/yyyy"
+							timeZone="America/Sao_Paulo" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Pagamento" style="text-align: center"
+					sortBy="#{lancamento.dataPagamento}" width="100">
+					<h:outputText value="#{lancamento.dataPagamento}">
+						<f:convertDateTime pattern="dd/MM/yyyy"
+							timeZone="America/Sao_Paulo" />
+					</h:outputText>
+				</p:column>
+				</p:dataTable>
+			</p:panelGrid><br /><br />	
+			<br />
+		</h:form>
+	</ui:define>
+</ui:composition>

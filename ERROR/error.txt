@@ -1,0 +1,30 @@
+1)Na pacote algaworks.financeiro.bean
+possui 3 classes uma que faz a autenticao do usuario e ela depende do arquivo facesconging que nele está mapeado as urls e quando faz a autenticacao é gerada uma instancia desta classe e verifica se o usuario ta autenticado se ele autentica ok.  ae é redirecionado para respectiva ROLE por permissao e no caso o login esta funcionando só que nao sei se o cdi está injetando dependencias junto com spring e versa pois quando eu logo tem um botao consultaLAncamentos ao qual da o erro quando eu clico a mensagem de erro está na raiz do proejto uam pasta ERROR eu tirei o print da tela .
+
+2)MEu arquivo xml está configurado de acordo com o tutorial qeu segui q foi esse https://github.com/IgorCS/SS
+desculpa ter mandando o arquivo que ta no meu git hub mais esse projeto esta configurado de acordo com o q ta esse projeto aí do LINK do git hub la na meu arquivo app context tem um component q faz a leitura* da classe que está fazendo referencia ao bean no caso fiz assim 
+
+
+<context:component-scan base-package="com.algaworks.*">
+
+</context:component-scan>
+
+e o datasource em seguida no mesmo arquivo e na minha classe repositori.Lancamentos eu anotei c a seguinte anotacao 
+@Scope("request")
+@Component("consultaLancamentosBean")
+
+la na classe tem mais anotacoes pois se eu tirar da erro no momento q starta o servidor ae aonde acontece o erro creio q seja por conta disto acho q o cdi está injetando dependencias com spring nao sei se é possível  fazer com q o spring apenas faça o trabalho de logar e no caso eu fazer a inversao de controle com o cdi mesmo quando eu retiro o arquivo 
+
+
+	<application>
+		<el-resolver>
+    		    org.springframework.web.jsf.el.SpringBeanFacesELResolver
+		</el-resolver>
+  	</application>
+
+
+do meu faces config que é ele que gerencia as injcao de dependencias do spring nas minhas classes ele nao loga pois queria q o arquivo faces config ficasse apenas com a configuracao anterior pois com o faces config padrao já funciona a injecao de dependencias com o cdi pois pelo o q eu andei vendo na internet as versões anteriores ao JSF 2, não existiam as anotações para registrar managed beans, e por isso, o arquivo faces-config.xml era obrigatório e ele padrao do jeito q estava antes já funcionava creio eu q ae aonde ta o problema como to gerenciando ele pelo spring nao está injetando as dependencias corretas.
+
+
+
+
